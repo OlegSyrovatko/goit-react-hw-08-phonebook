@@ -8,6 +8,7 @@ export const Link = styled(NavLink)`
   text-decoration: none;
   color: black;
   font-weight: 500;
+
   transition: color 0.3s ease, background-color 0.3s ease;
 
   &.active {
@@ -17,5 +18,8 @@ export const Link = styled(NavLink)`
   &:hover {
     color: white;
     background-color: #ff591d;
+  }
+  @media (max-width: 767px) {
+    padding: 6px 8px;
   }
 `;

@@ -1,24 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { authSelectors, authOperations } from '../../redux/auth';
 
-import { Button } from '../../views/ContactsView.styled';
+import { Container, Button, Avatar, Name } from '../../views/ContactsView.styled';
 import defaultAvatar from './default-avatar.jpg';
-
-const styles = {
-  container: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  avatar: {
-    marginRight: 4,
-    marginLeft: 10,
-  },
-  name: {
-    fontWeight: 700,
-    marginRight: 12,
-  },
-};
-
 
 export default function UserMenu() {
   
@@ -31,12 +15,12 @@ export default function UserMenu() {
   } 
 
   return (
-    <div style={styles.container}>
-      <img src={avatar} alt="" width="32" style={styles.avatar} />
-      <span style={styles.name}>Wellcome, {name}</span>
+    <Container>
+      <Avatar src={avatar} alt="" width="32" />
+      <Name>Wellcome, {name}</Name>
       <Button type="button" onClick={handleLogout}>
         Logout
       </Button>
-    </div>
+    </Container>
   );
 }
