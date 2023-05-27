@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import logOut from 'redux/auth/auth-operations';
+import { logOut } from 'redux/auth/auth-operations';
+
 import { fetchContacts, addContact, deleteContact } from './operations';
+import Notiflix from 'notiflix';
 
 const handlePending = state => {
   state.isLoading = true;
@@ -8,7 +10,8 @@ const handlePending = state => {
 
 const handleRejected = (state, action) => {
   state.isLoading = false;
-  state.error = action.payload;
+    state.error = action.payload;
+    Notiflix.Notify.failure(action.payload);
 };
 
 const contactsSlice = createSlice({
@@ -33,7 +36,8 @@ const contactsSlice = createSlice({
     [addContact.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
-      state.items.push(action.payload);
+        state.items.push(action.payload);
+        Notiflix.Notify.success(`${action.payload.name} added to yours contacts`);
     },
     [deleteContact.fulfilled](state, action) {
       state.isLoading = false;
@@ -41,14 +45,18 @@ const contactsSlice = createSlice({
       const index = state.items.findIndex(
         contact => contact.id === action.payload.id
       );
-      state.items.splice(index, 1);
+        state.items.splice(index, 1);
+
+        Notiflix.Notify.success(`Contact deleted`);
     },
     [logOut.fulfilled](state) {
       state.items = [];
       state.error = null;
       state.isLoading = false;
-    },
+      },
+    
   },
 });
+
 
 export const contactsReducer = contactsSlice.reducer;

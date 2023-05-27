@@ -6,7 +6,8 @@ import  ContactList    from 'components/ContactList';
 
 import { fetchContacts } from 'redux/contacts/operations';
 import { selectLoading } from 'redux/contacts/selectors';
-import Spinner from 'components/Spinner';
+
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
 
 import Modal from '../components/Modal';
 import  ContactForm from '../components/ContactForm';
@@ -28,6 +29,12 @@ const ContactsView = () => {
   };
 
   const isLoading = useSelector(selectLoading);
+  useEffect(() => {
+    if (isLoading) Loading.circle('Loading...')
+    else Loading.remove()
+      
+  }, [isLoading]);
+  
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -53,12 +60,6 @@ return (
             </ModalItems>
           </ModalBlock>
         </Modal>
-      )}
-      {isLoading && (
-        <>
-          <br />
-          <Spinner />
-        </>
       )}
       <ContactList/>
     </Book>

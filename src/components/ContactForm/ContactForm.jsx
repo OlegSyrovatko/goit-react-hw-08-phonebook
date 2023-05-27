@@ -1,22 +1,18 @@
 import { React, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { addContact } from 'redux/contacts/operations';
 import { setStatusModal } from 'redux/modalSlice';
-// import {
-//   useCreateContactMutation,
-//   useFetchContactsQuery,
-// } from 'redux/phonebookSlice';
+import { selectAllContacts } from 'redux/contacts/selectors';
 
 import { Button, Form, Label } from './ContactForm.styled';
-// import Notiflix from 'notiflix';
-// import { Spinner } from 'components/Spinner/Spinner';
+import Notiflix from 'notiflix';
 
 const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const dispatch = useDispatch();
-  // const [createContact, { isLoading, error }] = useCreateContactMutation();
-  // const { data: contacts } = useFetchContactsQuery();
+  const contacts = useSelector(selectAllContacts);
 
   const handleName = e => {
     setName(e.currentTarget.value);
@@ -28,23 +24,15 @@ const ContactForm = () => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    // const isNameExists = contacts.some(
-    //   contact => contact.name?.toLowerCase() === name.toLowerCase()
-    // );
+    const isNameExists = contacts.some(
+      contact => contact.name?.toLowerCase() === name.toLowerCase()
+    );
+    if (isNameExists) {
+      Notiflix.Notify.warning(`${name} is already in contacts`);
+      return;
+    }
 
-    // if (isNameExists) {
-    //   Notiflix.Notify.warning(`${name} is already in contacts`);
-    //   return;
-    // }
-
-    // createContact({ name: name, number: number });
-    // if (error) {
-    //   Notiflix.Notify.failure(error.message);
-    //   return;
-    // }
     dispatch(addContact({ name, number }));
-    // Notiflix.Notify.success(isLoading);
-
     setName('');
     setNumber('');
     dispatch(setStatusModal(false));
@@ -82,7 +70,6 @@ const ContactForm = () => {
           type="submit"
           // disabled={isLoading}
         >
-          {/* {isLoading && <Spinner size={12} />} */}
           Add Contact
         </Button>
       </Form>
