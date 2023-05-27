@@ -11,6 +11,7 @@ const styles = {
   },
   avatar: {
     marginRight: 4,
+    marginLeft: 10,
   },
   name: {
     fontWeight: 700,

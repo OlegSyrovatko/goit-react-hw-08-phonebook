@@ -8,15 +8,13 @@ export const Link = styled(NavLink)`
   text-decoration: none;
   color: black;
   font-weight: 500;
-  transition: color 0.3s ease, background-color 0.3s ease; /* Added transition property */
+  transition: color 0.3s ease, background-color 0.3s ease;
 
   &.active {
     color: white;
     background-color: orangered;
   }
   &:hover {
-    /* Add your desired styles for when the link is hovered */
-    /* Example styles: */
     color: white;
     background-color: #ff591d;
   }
