@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { authSelectors, authOperations } from '../../redux/auth';
 
+import { Button } from '../../views/ContactsView.styled';
 import defaultAvatar from './default-avatar.jpg';
 
 const styles = {
@@ -32,9 +33,9 @@ export default function UserMenu() {
     <div style={styles.container}>
       <img src={avatar} alt="" width="32" style={styles.avatar} />
       <span style={styles.name}>Wellcome, {name}</span>
-      <button type="button" onClick={handleLogout}>
+      <Button type="button" onClick={handleLogout}>
         Logout
-      </button>
+      </Button>
     </div>
   );
 }
