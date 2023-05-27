@@ -1,11 +1,12 @@
-import React from 'react';
-
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setStatusModal } from 'redux/modalSlice';
 import { getModal } from 'redux/selectors';
-// import { useFetchContactsQuery } from 'redux/phonebookSlice';
-// import ContactList from 'components/ContactList';
-// import { Spinner } from 'components/Spinner/Spinner';
+import  ContactList    from 'components/ContactList';
+
+import { fetchContacts } from 'redux/contacts/operations';
+import { selectLoading } from 'redux/contacts/selectors';
+import Spinner from 'components/Spinner';
 
 import Modal from '../components/Modal';
 import  ContactForm from '../components/ContactForm';
@@ -20,12 +21,18 @@ import {
 
 
 const ContactsView = () => {
-//   const { data: contacts, isFetching } = useFetchContactsQuery();
   const showModal = useSelector(getModal);
   const dispatch = useDispatch();
   const toggleModal = () => {
     dispatch(setStatusModal(!showModal));
   };
+
+  const isLoading = useSelector(selectLoading);
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
 return (
   <>
     <Book>
@@ -47,13 +54,13 @@ return (
           </ModalBlock>
         </Modal>
       )}
-      {/* {!contacts && isFetching && (
+      {isLoading && (
         <>
           <br />
           <Spinner />
         </>
-      )} */}
-      {/* {contacts && <ContactList contacts={contacts} />} */}
+      )}
+      <ContactList/>
     </Book>
   </>
 

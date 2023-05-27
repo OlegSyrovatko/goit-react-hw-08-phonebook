@@ -12,10 +12,12 @@ const spin = keyframes`
 }
 `;
 
-export const Spinner = styled(CgSpinner)`
+const Spinner = styled(CgSpinner)`
   animation: ${spin} 0.85s linear infinite;
 `;
 
 Spinner.defaultProps = {
   size: 40,
 };
+
+export default Spinner;

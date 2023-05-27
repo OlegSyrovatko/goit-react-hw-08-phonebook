@@ -1,6 +1,6 @@
 import { React, useState } from 'react';
 import { useDispatch } from 'react-redux';
-
+import { addContact } from 'redux/contacts/operations';
 import { setStatusModal } from 'redux/modalSlice';
 // import {
 //   useCreateContactMutation,
@@ -42,7 +42,7 @@ const ContactForm = () => {
     //   Notiflix.Notify.failure(error.message);
     //   return;
     // }
-
+    dispatch(addContact({ name, number }));
     // Notiflix.Notify.success(isLoading);
 
     setName('');
