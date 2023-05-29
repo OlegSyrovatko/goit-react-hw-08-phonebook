@@ -48,15 +48,15 @@ export default function RegisterView() {
 
       <form onSubmit={handleSubmit} style={styles.form} autoComplete="off">
         <label style={styles.label}>  
-          <TextField label="Name" variant="outlined" name="name" value={name} onChange={handleChange} />
+          <TextField required label="Name" variant="outlined" name="name" value={name} onChange={handleChange} />
         </label>
 
         <label style={styles.label}>
-          <TextField label="E-mail" variant="outlined" name="email" value={email} onChange={handleChange} />
+          <TextField required label="E-mail" variant="outlined" name="email" value={email} onChange={handleChange} />
         </label>
 
         <label style={styles.label}>
-          <TextField type="password" label="Password" variant="outlined" name="password" value={password} onChange={handleChange} />
+          <TextField required type="password" label="Password" variant="outlined" name="password" value={password} onChange={handleChange} />
         </label>
 
         <Button variant="contained" type="submit">Sign-up</Button>
